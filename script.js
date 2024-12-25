@@ -2,9 +2,17 @@ let input = document.getElementById("inputBox");
 let buttons = document.querySelectorAll("button");
 let string = "";
 let arr = Array.from(buttons);
+function calculatePercentage(expression) {
+  return expression.replace(
+    /(\d+(\.\d+)?)%/g,
+    (match, p1) => parseFloat(p1) / 100
+  );
+}
+
 arr.forEach((button) => {
   button.addEventListener("click", (e) => {
     if (e.target.innerHTML == "=") {
+      string = calculatePercentage(string);
       string = eval(string);
       input.value = string;
     } else if (e.target.innerHTML == "AC") {
